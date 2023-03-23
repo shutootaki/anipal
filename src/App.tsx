@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ChatPage } from "./components/pages/ChatPage";
+import { SignInPage } from "./components/pages/SignInPage";
+import { useSelector } from "react-redux";
+import "./App.css";
+import { useEffect } from "react";
+import { auth } from "./utils/firebase";
+import { useDispatch } from "react-redux";
+import { login, logout, startLoading } from "./store/userSlice";
+import { RootState } from "./store/store";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const user = useSelector((state: RootState) => state.user.user);
+  const isLoading = useSelector((state: RootState) => state.user.isLoading);
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(startLoading());
+    auth.onAuthStateChanged((loginuser) => {
+      if (loginuser) {
+        dispatch(
+          login({
+            uid: loginuser.uid,
+            email: loginuser.email,
+            displayName: loginuser.displayName,
+            photoURL: loginuser.photoURL,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-800 text-xl font-bold text-white">
+        loading...
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    );
+  }
+
+  return <div className="App">{user ? <ChatPage /> : <SignInPage />}</div>;
 }
-
-export default App
