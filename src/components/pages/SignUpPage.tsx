@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import { Button } from "../ui/Button";
 import { onSubmitSignUp } from "../features/auth/onSubmitSignUp";
+import { Spinner } from "../ui/Spinner";
 
 export const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [photo, setPhoto] = useState<File>();
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -32,13 +34,29 @@ export const SignUpPage = () => {
     fileInputRef.current?.click();
   };
 
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-800 ">
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-screen items-center justify-center bg-gray-600">
       <div className="mb-10 flex  w-10/12 rounded-lg bg-white px-8 py-4 shadow-lg md:p-8	lg:w-6/12">
         <form
           className="w-full"
           onSubmit={(event) =>
-            onSubmitSignUp(event, name, photo, email, password, navigate)
+            onSubmitSignUp(
+              event,
+              name,
+              photo,
+              email,
+              password,
+              navigate,
+              setLoading
+            )
           }
         >
           <div className="mb-2 flex flex-col items-center justify-center md:mb-4">

@@ -11,9 +11,11 @@ export const onSubmitSignUp = async (
   photo: File | undefined,
   email: string,
   password: string,
-  navigate: NavigateFunction
+  navigate: NavigateFunction,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   event.preventDefault();
+  setLoading(true);
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const storageRef = ref(storage, `${name}: ${res.user.uid}`);
@@ -30,8 +32,10 @@ export const onSubmitSignUp = async (
             email,
             photoURL: downloadURL,
           });
+          setLoading(false);
           navigate("/");
         } catch (err) {
+          setLoading(false);
           alert(err);
         }
       });

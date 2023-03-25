@@ -7,6 +7,7 @@ import { auth } from "./utils/firebase";
 import { useDispatch } from "react-redux";
 import { login, logout, startLoading } from "./store/userSlice";
 import { RootState } from "./store/store";
+import { Spinner } from "./components/ui/Spinner";
 
 export default function App() {
   const user = useSelector((state: RootState) => state.user.user);
@@ -34,8 +35,8 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-800 text-xl font-bold text-white">
-        loading...
+      <div className="flex h-screen items-center justify-center bg-gray-800">
+        <Spinner />
       </div>
     );
   }

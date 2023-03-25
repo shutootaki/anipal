@@ -7,6 +7,7 @@ import { RootState } from "../../../store/store";
 import { Prompt } from "../../../utils/types";
 import { addDocToCollection } from "./functions/addDocToCollection";
 import { useCallGPT } from "./hooks/useCallGPT";
+import { Spinner } from "../../ui/Spinner";
 
 export const ChatInput = () => {
   const [message, setMessage] = useState("");
@@ -50,7 +51,7 @@ export const ChatInput = () => {
     <div className="ml-2 mb-14 items-center justify-start p-2 shadow-md md:mx-16">
       {loading ? (
         <div className="flex justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-t-2 border-b-2 border-purple-500"></div>
+          <Spinner />
         </div>
       ) : (
         <form className="flex">
