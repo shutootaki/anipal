@@ -1,4 +1,3 @@
-import { GiArtificialIntelligence } from "react-icons/gi";
 import { Button } from "./Button";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { auth, db } from "../../utils/firebase";
 import { HamburgerMenu } from "./HamburgerMenu";
 import { Channel } from "../../utils/types";
 import { addDocToCollection } from "../features/chat/functions/addDocToCollection";
+import { AiOutlineHeart } from "react-icons/ai";
 
 export const Header = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -41,9 +41,9 @@ export const Header = () => {
         <div className="z-10 block md:hidden">
           <HamburgerMenu channels={channels} addChannel={addChannel} />
         </div>
-        <div className="flex justify-center text-center text-2xl font-bold">
-          <GiArtificialIntelligence size={28} />
-          echo
+        <div className="flex items-center justify-center text-center text-2xl font-bold">
+          <AiOutlineHeart />
+          AniPal
         </div>
       </div>
       {user && <Button onClick={() => auth.signOut()} children="Sign Out" />}

@@ -122,7 +122,7 @@ export const SignUpPage = () => {
             />
           </div>
           <div className="flex-col items-center justify-between text-center md:flex">
-            <Button className="mb-4 rounded-lg bg-purple-600 py-2 px-6 text-lg font-bold text-white hover:bg-purple-700">
+            <Button className="mb-4 rounded-lg bg-teal-600 py-2 px-6 text-lg font-bold text-white hover:bg-teal-700">
               Sign Up
             </Button>
             <a

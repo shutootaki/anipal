@@ -66,7 +66,7 @@ export const ChatInput = () => {
           />
           <button
             type="submit"
-            className="rounded-lg bg-purple-600 px-4 py-2 text-white hover:bg-purple-700 focus:outline-none"
+            className="rounded-lg bg-teal-600 px-4 py-2 text-white hover:bg-teal-700 focus:outline-none"
             onClick={(e: React.MouseEvent<HTMLElement>) => sendMessage(e)}
           >
             <BsSend />
