@@ -48,7 +48,7 @@ export const ChatInput = () => {
   if (channelId == null) return null;
 
   return (
-    <div className="ml-2 mb-14 items-center justify-start p-2 shadow-md md:mx-16">
+    <div className="ml-2 items-center justify-start p-2 shadow-md md:mx-16">
       {loading ? (
         <div className="flex justify-center">
           <Spinner />

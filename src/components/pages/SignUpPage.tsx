@@ -36,14 +36,14 @@ export const SignUpPage = () => {
 
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-800 ">
+      <div className="flex  items-center justify-center bg-gray-800 ">
         <Spinner />
       </div>
     );
   }
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-600">
+    <div className="flex  items-center justify-center bg-gray-600">
       <div className="mb-10 flex  w-10/12 rounded-lg bg-white px-8 py-4 shadow-lg md:p-8	lg:w-6/12">
         <form
           className="w-full"

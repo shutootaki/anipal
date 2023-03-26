@@ -23,7 +23,7 @@ export function HamburgerMenu({ channels, addChannel }: Props) {
         />
       </div>
       <nav
-        className={`transition-left fixed top-0 flex h-screen w-56 justify-center bg-gray-800 ${
+        className={`transition-left fixed top-0 flex h-full w-56 justify-center bg-gray-800 ${
           sidebar ? "left-0" : "-left-full"
         }`}
       >

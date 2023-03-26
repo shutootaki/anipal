@@ -27,7 +27,7 @@ export const ChatHeader = () => {
   if (!channelName) return null;
   return (
     <header className="flex w-full items-center justify-between border-b border-dashed p-2 px-4 text-white">
-      <h3 className="flex items-center gap-3 text-center text-xl font-bold tracking-tight sm:text-left">
+      <h3 className="text-md flex items-center gap-3 text-center font-bold tracking-tight sm:text-left sm:text-xl">
         <BsChatRight />
         {channelName}
       </h3>

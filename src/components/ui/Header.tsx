@@ -36,7 +36,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex h-12 w-full items-center justify-between gap-2 border-b bg-gray-700 px-3 text-white">
+    <header className="absolute flex h-12 w-full items-center justify-between gap-2 border-b bg-gray-700 px-3 text-white">
       <div className="flex">
         <div className="z-10 block md:hidden">
           <HamburgerMenu channels={channels} addChannel={addChannel} />

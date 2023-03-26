@@ -35,7 +35,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className="hidden h-screen flex-col bg-gray-800 p-2 font-semibold text-white md:flex md:w-1/5">
+    <nav className="hidden  flex-col bg-gray-800 p-2 font-semibold text-white md:flex md:w-1/5">
       <div className="flex items-center justify-between p-2 text-center text-white ">
         <h3 className="hidden md:flex md:text-lg">Chat List</h3>
         <BsPlusCircle
@@ -60,6 +60,6 @@ export const Sidebar = () => {
           <h4 className="hidden pb-1 md:flex">{channel.channel.channelName}</h4>
         </div>
       ))}
-    </div>
+    </nav>
   );
 };

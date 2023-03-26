@@ -17,7 +17,7 @@ export const SignInPage = () => {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-600">
+    <div className="flex  items-center justify-center bg-gray-600">
       <div className="mb-10  flex w-10/12 rounded-lg bg-white p-8	shadow-lg lg:w-6/12">
         <form
           className="w-full"

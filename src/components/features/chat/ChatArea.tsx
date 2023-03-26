@@ -4,9 +4,11 @@ import { ChatInput } from "./ChatInput";
 
 export const ChatArea = () => {
   return (
-    <div className="flex h-screen w-full grow flex-col bg-gray-700">
-      <ChatHeader />
-      <ChatBody />
+    <div className="flex w-full grow flex-col bg-gray-700">
+      <div className="h-90p pb-12">
+        <ChatHeader />
+        <ChatBody />
+      </div>
       <ChatInput />
     </div>
   );

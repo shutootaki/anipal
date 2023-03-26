@@ -1,7 +1,6 @@
 import { ChatPage } from "./components/pages/ChatPage";
 import { SignInPage } from "./components/pages/SignInPage";
 import { useSelector } from "react-redux";
-import "./App.css";
 import { useEffect } from "react";
 import { auth } from "./utils/firebase";
 import { useDispatch } from "react-redux";
@@ -35,11 +34,15 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-800">
+      <div className="flex h-full items-center justify-center bg-gray-800">
         <Spinner />
       </div>
     );
   }
 
-  return <div className="App">{user ? <ChatPage /> : <SignInPage />}</div>;
+  return (
+    <div className="App h-full pt-12">
+      {user ? <ChatPage /> : <SignInPage />}
+    </div>
+  );
 }

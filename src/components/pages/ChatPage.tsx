@@ -3,7 +3,7 @@ import { ChatArea } from "../features/chat/ChatArea";
 
 export const ChatPage = () => {
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <Sidebar />
       <ChatArea />
     </div>
