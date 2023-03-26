@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "../../../utils/firebase";
 import { useSelector } from "react-redux";
 import {
@@ -21,6 +21,7 @@ type Message = {
 export const ChatBody = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const channelId = useSelector((state: RootState) => state.channel.channelId);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let collectionRef = collection(
@@ -32,7 +33,7 @@ export const ChatBody = () => {
 
     const cllectionRefOrderBy = query(
       collectionRef,
-      orderBy("timeStamp", "desc")
+      orderBy("timeStamp", "asc")
     );
 
     onSnapshot(cllectionRefOrderBy, (snapshot) => {
@@ -46,15 +47,20 @@ export const ChatBody = () => {
       });
       setMessages(newMessage);
     });
-
     return () => {
       setMessages([]);
     };
   }, [channelId]);
 
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   if (!channelId) {
     return (
-      <div className="h-screen overflow-y-scroll">
+      <div className="h-full">
         <div className="m-4">
           <h1 className="py-9 text-center text-xl font-bold text-white">
             <span className="block md:hidden">左上のトグルボタンから</span>
@@ -66,7 +72,10 @@ export const ChatBody = () => {
   }
 
   return (
-    <div className="h-screen overflow-y-scroll">
+    <div
+      className="h-full overflow-y-scroll scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-gray-400"
+      ref={scrollRef}
+    >
       {messages.map((message, i) => (
         <div className="flex p-3 text-white" key={i}>
           <Avatar src={message.userImage} />
