@@ -65,7 +65,7 @@ export const ChatInput = () => {
             type="text"
             placeholder={`メッセージを送信`}
             value={message}
-            className="mr-2 flex-1 rounded-lg border border-gray-200 px-4 py-2 text-xs focus:outline-none md:text-lg"
+            className="mr-2 flex-1 rounded-lg border border-gray-200 px-4 py-2 text-sm focus:outline-none md:text-lg"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setMessage(e.target.value)
             }

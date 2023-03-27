@@ -84,7 +84,7 @@ export const SignUpPage = () => {
               User Name
             </label>
             <input
-              className="w-full rounded-lg border border-gray-400 p-2 text-xs  md:text-lg"
+              className="w-full rounded-lg border border-gray-400 p-2 text-sm  md:text-lg"
               type="text"
               id="name"
               value={name}
@@ -99,7 +99,7 @@ export const SignUpPage = () => {
               E-mail
             </label>
             <input
-              className="w-full rounded-lg border border-gray-400 p-2 text-xs  md:text-lg"
+              className="w-full rounded-lg border border-gray-400 p-2 text-sm  md:text-lg"
               type="text"
               id="email"
               value={email}
@@ -115,7 +115,7 @@ export const SignUpPage = () => {
               Password
             </label>
             <input
-              className="w-full rounded-lg border border-gray-400 p-2 text-xs  md:text-lg"
+              className="w-full rounded-lg border border-gray-400 p-2 text-sm  md:text-lg"
               type="password"
               id="password"
               onChange={handlePasswordChange}

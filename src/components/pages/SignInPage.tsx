@@ -31,7 +31,7 @@ export const SignInPage = () => {
               E-mail
             </label>
             <input
-              className="w-full rounded-lg border border-gray-400 p-2 text-xs  md:text-lg"
+              className="w-full rounded-lg border border-gray-400 p-2 text-sm  md:text-lg"
               type="text"
               id="email"
               value={email}
@@ -46,7 +46,7 @@ export const SignInPage = () => {
               Password
             </label>
             <input
-              className="w-full rounded-lg border border-gray-400 p-2 text-xs  md:text-lg"
+              className="w-full rounded-lg border border-gray-400 p-2 text-sm  md:text-lg"
               type="password"
               id="password"
               onChange={handlePasswordChange}
