@@ -1,5 +1,5 @@
 import { BsChatRight, BsPlusCircle } from "react-icons/bs";
-import { collection, query } from "firebase/firestore";
+import { addDoc, collection, doc, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../utils/firebase";
 import { onSnapshot } from "firebase/firestore";
@@ -30,7 +30,14 @@ export const Sidebar = () => {
   const addChannel = async () => {
     const channelName = prompt("チャンネル名を入力してください");
     if (channelName) {
-      addDocToCollection(collection(db, "channels"), { channelName });
+      const docRef = await addDoc(collection(db, "channels"), { channelName });
+
+      dispatch(
+        setChannelInfo({
+          channelId: docRef.id,
+          channelName,
+        })
+      );
     }
   };
 
