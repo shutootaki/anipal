@@ -82,11 +82,11 @@ export const ChatBody = () => {
           <div className="pl-2">
             <h4>
               {message.user}
-              <span className="ml-2 text-xs text-gray-400">
+              <span className="ml-2 text-sm text-gray-400">
                 {new Date(message.timeStamp?.toDate()).toLocaleString()}
               </span>
             </h4>
-            <p>{message.message}</p>
+            <p dangerouslySetInnerHTML={{ __html: message.message }} />
           </div>
         </div>
       ))}

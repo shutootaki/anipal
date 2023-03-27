@@ -32,7 +32,6 @@ export const getDraAI = async (
     ...prevChatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
-  console.log({ data: draChatHistory });
 
   return data.choices[0].message.content;
 };

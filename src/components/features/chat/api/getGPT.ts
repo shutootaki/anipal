@@ -27,6 +27,5 @@ export const getGPT = async (
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 
-  console.log({ data: chatHistory });
   return data.choices[0].message.content;
 };

@@ -20,9 +20,7 @@ export const useCallGPT = () => {
   ) => {
     setLoading(true);
     const prompt = message.slice(4);
-    console.log("prompt", prompt);
     const res = await getGPT(prompt, chatHistory, setChatHistory);
-    console.log(res);
     addDocToCollection(collectionRef, {
       message: res,
       timeStamp: serverTimestamp(),
@@ -48,8 +46,10 @@ export const useCallGPT = () => {
       draChatHistory,
       setDraChatHistory
     );
+    message = res.replace(/\n/g, "<br/>");
+
     addDocToCollection(collectionRef, {
-      message: res,
+      message,
       timeStamp: serverTimestamp(),
       user: "ドラえもんAI",
       userImage:
