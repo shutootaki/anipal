@@ -40,7 +40,13 @@ export const ChatInput = () => {
     }
 
     if (message.startsWith("/dra")) {
-      callDra(message, draChatHistory, setDraChatHistory, collectionRef);
+      callDra(
+        message,
+        user?.displayName,
+        draChatHistory,
+        setDraChatHistory,
+        collectionRef
+      );
     }
     setMessage("");
   };
@@ -66,7 +72,7 @@ export const ChatInput = () => {
           />
           <button
             type="submit"
-            className="rounded-lg bg-teal-600 px-4 py-2 text-white hover:bg-teal-700 focus:outline-none"
+            className="rounded-lg bg-teal-600 px-4 py-2 text-white focus:outline-none hover:bg-teal-700"
             onClick={(e: React.MouseEvent<HTMLElement>) => sendMessage(e)}
           >
             <BsSend />

@@ -35,13 +35,19 @@ export const useCallGPT = () => {
 
   const callDra = async (
     message: string,
+    userName: string | undefined,
     draChatHistory: Prompt[],
     setDraChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>,
     collectionRef: CollectionReference<DocumentData>
   ) => {
     setLoading(true);
     const prompt = message.slice(4);
-    const res = await getDraAI(prompt, draChatHistory, setDraChatHistory);
+    const res = await getDraAI(
+      prompt,
+      userName,
+      draChatHistory,
+      setDraChatHistory
+    );
     addDocToCollection(collectionRef, {
       message: res,
       timeStamp: serverTimestamp(),

@@ -3,6 +3,7 @@ import { DRA_PROMPT } from "../../../../utils/constants";
 
 export const getDraAI = async (
   prompt: string,
+  userName: string | undefined,
   draChatHistory: Prompt[],
   setDraChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>
 ) => {
@@ -10,11 +11,11 @@ export const getDraAI = async (
     model: "gpt-3.5-turbo",
     messages: draChatHistory.length
       ? [
-          DRA_PROMPT,
+          DRA_PROMPT(userName),
           ...draChatHistory.slice(-2),
           { role: "user", content: prompt },
         ]
-      : [DRA_PROMPT, { role: "user", content: prompt }],
+      : [DRA_PROMPT(userName), { role: "user", content: prompt }],
   });
 
   const res = await fetch("https://api.openai.com/v1/chat/completions", {

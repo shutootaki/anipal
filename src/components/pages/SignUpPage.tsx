@@ -36,7 +36,7 @@ export const SignUpPage = () => {
 
   if (loading) {
     return (
-      <div className="flex  items-center justify-center bg-gray-800 ">
+      <div className="flex h-full items-center justify-center bg-gray-800 ">
         <Spinner />
       </div>
     );
