@@ -17,8 +17,8 @@ export const SignInPage = () => {
   };
 
   return (
-    <div className="flex  items-center justify-center bg-gray-600">
-      <div className="mb-10  flex w-10/12 rounded-lg bg-white p-8	shadow-lg lg:w-6/12">
+    <div className="flex h-full items-center justify-center bg-gray-600">
+      <div className="flex w-10/12 rounded-lg bg-white p-8	shadow-lg lg:w-6/12">
         <form
           className="w-full"
           onSubmit={(event) => onSubmitSignIn(event, email, password, navigate)}
@@ -52,15 +52,15 @@ export const SignInPage = () => {
               onChange={handlePasswordChange}
             />
           </div>
-          <div className="flex-col items-center justify-between text-center md:flex">
+          <div className="flex flex-col items-center text-center">
             <Button className="mb-4 rounded-lg bg-teal-600 py-2 px-6 text-lg font-bold text-white hover:bg-teal-700">
               Sign In
             </Button>
             <a
-              className="inline-block cursor-pointer font-semibold text-blue-600 hover:underline dark:text-blue-500"
+              className="inline-block cursor-pointer text-sm font-semibold text-blue-700 hover:underline"
               onClick={() => navigate("/sign-up")}
             >
-              Sign Upはこちらから
+              Sign Upはこちらから→
             </a>
           </div>
         </form>
