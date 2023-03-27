@@ -38,9 +38,11 @@ export const Header = () => {
   return (
     <header className="absolute flex h-12 w-full items-center justify-between gap-2 border-b bg-gray-700 px-3 text-white">
       <div className="flex">
-        <div className="z-10 block md:hidden">
-          <HamburgerMenu channels={channels} addChannel={addChannel} />
-        </div>
+        {user && (
+          <div className="z-10 block md:hidden">
+            <HamburgerMenu channels={channels} addChannel={addChannel} />
+          </div>
+        )}
         <div className="flex items-center justify-center text-center text-2xl font-bold">
           <AiOutlineHeart />
           AniPal
