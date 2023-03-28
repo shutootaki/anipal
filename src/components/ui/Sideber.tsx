@@ -3,16 +3,17 @@ import { addDoc, collection, doc, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../utils/firebase";
 import { onSnapshot } from "firebase/firestore";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setChannelInfo } from "../../store/channelSlice";
 import { Channel } from "../../utils/types";
-import { addDocToCollection } from "../features/chat/functions/addDocToCollection";
+import { RootState } from "../../store/store";
 
 export const Sidebar = () => {
   const [channels, setChannels] = useState<Channel[]>([]);
+  const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch();
 
-  const q = query(collection(db, "channels"));
+  const q = query(collection(db, "users", String(user?.uid), "Pchannel"));
 
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
@@ -29,9 +30,13 @@ export const Sidebar = () => {
 
   const addChannel = async () => {
     const channelName = prompt("チャンネル名を入力してください");
-    if (channelName) {
-      const docRef = await addDoc(collection(db, "channels"), { channelName });
-
+    if (channelName && user) {
+      const docRef = await addDoc(
+        collection(db, "users", user.uid, "Pchannel"),
+        {
+          channelName,
+        }
+      );
       dispatch(
         setChannelInfo({
           channelId: docRef.id,
