@@ -8,11 +8,18 @@ export const ChatHeader = () => {
   const channelName = useSelector(
     (state: RootState) => state.channel.channelName
   );
+  const user = useSelector((state: RootState) => state.user.user);
   const channelId = useSelector((state: RootState) => state.channel.channelId);
 
   const handleDeleteClick = async () => {
     try {
-      const docRef = doc(db, "channels", String(channelId));
+      const docRef = doc(
+        db,
+        "users",
+        String(user?.uid),
+        "Pchannel",
+        String(channelId)
+      );
       if (window.confirm("こちらのチャンネルを削除しますか？")) {
         await deleteDoc(docRef);
         window.location.reload();
