@@ -39,9 +39,8 @@ export const useCallGPT = () => {
     collectionRef: CollectionReference<DocumentData>
   ) => {
     setLoading(true);
-    const prompt = message.slice(4);
     const res = await getDraAI(
-      prompt,
+      message,
       userName,
       draChatHistory,
       setDraChatHistory

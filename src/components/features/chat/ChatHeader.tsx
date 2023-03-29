@@ -5,11 +5,10 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../utils/firebase";
 
 export const ChatHeader = () => {
-  const channelName = useSelector(
-    (state: RootState) => state.channel.channelName
-  );
   const user = useSelector((state: RootState) => state.user.user);
-  const channelId = useSelector((state: RootState) => state.channel.channelId);
+  const channel = useSelector((state: RootState) => state.channel);
+
+  const { channelName, channelId } = channel;
 
   const handleDeleteClick = async () => {
     try {
@@ -17,7 +16,7 @@ export const ChatHeader = () => {
         db,
         "users",
         String(user?.uid),
-        "Pchannel",
+        "privateChannel",
         String(channelId)
       );
       if (window.confirm("こちらのチャンネルを削除しますか？")) {
@@ -38,11 +37,13 @@ export const ChatHeader = () => {
         <BsChatRight />
         {channelName}
       </h3>
-      <BsTrash3
-        onClick={handleDeleteClick}
-        size={20}
-        className="mr-2 cursor-pointer hover:text-red-400"
-      />
+      {channelName === "ドラえもん" ?? (
+        <BsTrash3
+          onClick={handleDeleteClick}
+          size={20}
+          className="mr-2 cursor-pointer hover:text-red-400"
+        />
+      )}
     </header>
   );
 };

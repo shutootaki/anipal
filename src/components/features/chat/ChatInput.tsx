@@ -13,9 +13,10 @@ export const ChatInput = () => {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState<Prompt[]>([]);
   const [draChatHistory, setDraChatHistory] = useState<Prompt[]>([]);
-  const channelId = useSelector((state: RootState) => state.channel.channelId);
+  const channel = useSelector((state: RootState) => state.channel);
   const { callGPT, callDra, loading } = useCallGPT();
   const user = useSelector((state: RootState) => state.user.user);
+  const { channelId, channelName } = channel;
 
   const sendMessage = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ export const ChatInput = () => {
       callGPT(message, chatHistory, setChatHistory, collectionRef);
     }
 
-    if (message.startsWith("/dra")) {
+    if (message.startsWith("/dra") || channelName === "ドラえもん") {
       callDra(
         message,
         user?.displayName,
@@ -48,6 +49,7 @@ export const ChatInput = () => {
         collectionRef
       );
     }
+
     setMessage("");
   };
 

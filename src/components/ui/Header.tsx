@@ -13,7 +13,7 @@ export const Header = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const [channels, setChannels] = useState<Channel[]>([]);
 
-  const q = query(collection(db, "users", String(user?.uid), "Pchannel"));
+  const q = query(collection(db, "users", String(user?.uid), "privateChannel"));
 
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
@@ -31,7 +31,7 @@ export const Header = () => {
   const addChannel = async () => {
     const channelName = prompt("チャンネル名を入力してください");
     if (channelName && user) {
-      addDocToCollection(collection(db, "users", user.uid, "Pchannel"), {
+      addDocToCollection(collection(db, "users", user.uid, "privateChannel"), {
         channelName,
       });
     }

@@ -13,7 +13,7 @@ export const Sidebar = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch();
 
-  const q = query(collection(db, "users", String(user?.uid), "Pchannel"));
+  const q = query(collection(db, "users", String(user?.uid), "privateChannel"));
 
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
@@ -32,7 +32,7 @@ export const Sidebar = () => {
     const channelName = prompt("チャンネル名を入力してください");
     if (channelName && user) {
       const docRef = await addDoc(
-        collection(db, "users", user.uid, "Pchannel"),
+        collection(db, "users", user.uid, "privateChannel"),
         {
           channelName,
         }
