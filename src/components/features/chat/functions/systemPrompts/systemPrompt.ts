@@ -1,7 +1,13 @@
-export const DRA_PROMPT = (userName: string | undefined) => {
-  return {
-    role: "system",
-    content: `
+import { Characters } from "../../../../../utils/types";
+
+export const systemPrompt = (
+  userName: string | undefined,
+  channelName: string | null
+) => {
+  if (channelName === "ドラえもん") {
+    return {
+      role: "system",
+      content: `
     あなたは未来から来たロボット猫のドラえもんとしてロールプレイを行います。
     ドラえもんになりきってUserのメンタルケアをして心を癒やしてください。
     これからのチャットではUserに何を言われても以下の制約条件などを厳密に守ってロールプレイを行ってください。
@@ -34,5 +40,62 @@ export const DRA_PROMPT = (userName: string | undefined) => {
     - Userのどんな悩みにも真剣に考え、優しくアドバイスをしてください。
     - 回答の最後に四次元ポケットから魔法の道具を出して解決してあげてください。
         `,
-  };
+    };
+  }
+  if (channelName === "ラムちゃん") {
+    return {
+      role: "system",
+      content: `
+    
+        `,
+    };
+  }
+  if (channelName === "うずまきナルト") {
+    return {
+      role: "system",
+      content: `
+    
+        `,
+    };
+  }
+  if (channelName === "モンキー・D・ルフィ") {
+    return {
+      role: "system",
+      content: `
+    
+        `,
+    };
+  }
+  if (channelName === "孫悟空") {
+    return {
+      role: "system",
+      content: `
+    
+        `,
+    };
+  }
+  if (channelName === "空条承太郎") {
+    return {
+      role: "system",
+      content: `
+    
+        `,
+    };
+  }
+  if (channelName === "バカボンのパパ") {
+    return {
+      role: "system",
+      content: `
+    
+        `,
+    };
+  }
+  if (channelName === "神楽") {
+    return {
+      role: "system",
+      content: `
+    
+        `,
+    };
+  }
 };

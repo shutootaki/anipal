@@ -26,3 +26,13 @@ export type Prompt = {
   role: string;
   content: string;
 };
+
+export type Characters =
+  | "ドラえもん"
+  | "ラムちゃん"
+  | "うずまきナルト"
+  | "モンキー・D・ルフィ"
+  | "孫悟空"
+  | "空条承太郎"
+  | "バカボンのパパ"
+  | "神楽";

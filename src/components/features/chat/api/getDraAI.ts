@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux";
 import { Prompt } from "../../../../utils/types";
-import { DRA_PROMPT } from "../../../../utils/constants";
+import { systemPrompt } from "../functions/systemPrompts/systemPrompt";
+import { RootState } from "../../../../store/store";
 
 export const getDraAI = async (
   prompt: string,
@@ -7,15 +9,23 @@ export const getDraAI = async (
   draChatHistory: Prompt[],
   setDraChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>
 ) => {
+  const channelName = useSelector(
+    (state: RootState) => state.channel.channelName
+  );
+  console.log(channelName);
+
   const doraemonAI = JSON.stringify({
     model: "gpt-3.5-turbo",
     messages: draChatHistory.length
       ? [
-          DRA_PROMPT(userName),
+          systemPrompt(userName, channelName),
           ...draChatHistory.slice(-2),
           { role: "user", content: prompt },
         ]
-      : [DRA_PROMPT(userName), { role: "user", content: prompt }],
+      : [
+          systemPrompt(userName, channelName),
+          { role: "user", content: prompt },
+        ],
   });
 
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
