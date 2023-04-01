@@ -7,7 +7,6 @@ import { RootState } from "../../../store/store";
 export const ChatArea = () => {
   const channel = useSelector((state: RootState) => state.channel);
   const user = useSelector((state: RootState) => state.user.user);
-  console.log(channel.channelName);
 
   return (
     <div className="flex w-full grow flex-col bg-gray-700">

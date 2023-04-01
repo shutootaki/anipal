@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { getDraAI } from "../api/getDraAI";
 import { addDocToCollection } from "../functions/addDocToCollection";
-import { InitialChannnelState, Prompt, User } from "../../../../utils/types";
+import { Prompt } from "../../../../utils/types";
 import {
   CollectionReference,
   DocumentData,
@@ -9,6 +9,10 @@ import {
 } from "firebase/firestore";
 import { getGPT } from "../api/getGPT";
 import { getNarutoAI } from "../api/getNarutoAI";
+import { getGokuAI } from "../api/getGokuAI";
+import { getLuffyAI } from "../api/getLuffyAI";
+import { getIkkyuAI } from "../api/getIkkyuAI";
+import { getBakabonAI } from "../api/getBakabonAI";
 
 export const useCallGPT = (channelName: string | null) => {
   const [loading, setLoading] = useState(false);
@@ -62,8 +66,8 @@ export const useCallGPT = (channelName: string | null) => {
   const callNaruto = async (
     message: string,
     userName: string | undefined,
-    draChatHistory: Prompt[],
-    setDraChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>,
+    narutoChatHistory: Prompt[],
+    setNarutoChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>,
     collectionRef: CollectionReference<DocumentData>
   ) => {
     setLoading(true);
@@ -71,8 +75,8 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
-      draChatHistory,
-      setDraChatHistory
+      narutoChatHistory,
+      setNarutoChatHistory
     );
     message = res.replace(/\n/g, "<br/>");
 
@@ -84,5 +88,119 @@ export const useCallGPT = (channelName: string | null) => {
     });
     setLoading(false);
   };
-  return { callGPT, callDra, callNaruto, loading };
+
+  const callGoku = async (
+    message: string,
+    userName: string | undefined,
+    gokuChatHistory: Prompt[],
+    setGokuChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>,
+    collectionRef: CollectionReference<DocumentData>
+  ) => {
+    setLoading(true);
+    const res = await getGokuAI(
+      message,
+      userName,
+      channelName,
+      gokuChatHistory,
+      setGokuChatHistory
+    );
+    message = res.replace(/\n/g, "<br/>");
+
+    addDocToCollection(collectionRef, {
+      message,
+      timeStamp: serverTimestamp(),
+      user: "孫悟空",
+      userImage: "",
+    });
+    setLoading(false);
+  };
+
+  const callBakabon = async (
+    message: string,
+    userName: string | undefined,
+    bakabonChatHistory: Prompt[],
+    setBakabonChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>,
+    collectionRef: CollectionReference<DocumentData>
+  ) => {
+    setLoading(true);
+    const res = await getBakabonAI(
+      message,
+      userName,
+      channelName,
+      bakabonChatHistory,
+      setBakabonChatHistory
+    );
+    message = res.replace(/\n/g, "<br/>");
+
+    addDocToCollection(collectionRef, {
+      message,
+      timeStamp: serverTimestamp(),
+      user: "バカボンのパパ",
+      userImage: "",
+    });
+    setLoading(false);
+  };
+
+  const callIkyuu = async (
+    message: string,
+    userName: string | undefined,
+    ikyuuChatHistory: Prompt[],
+    setIkyuuChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>,
+    collectionRef: CollectionReference<DocumentData>
+  ) => {
+    setLoading(true);
+    const res = await getIkkyuAI(
+      message,
+      userName,
+      channelName,
+      ikyuuChatHistory,
+      setIkyuuChatHistory
+    );
+    message = res.replace(/\n/g, "<br/>");
+
+    addDocToCollection(collectionRef, {
+      message,
+      timeStamp: serverTimestamp(),
+      user: "一休さん",
+      userImage: "",
+    });
+    setLoading(false);
+  };
+
+  const callLuffy = async (
+    message: string,
+    userName: string | undefined,
+    luffyChatHistory: Prompt[],
+    setLuffyChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>,
+    collectionRef: CollectionReference<DocumentData>
+  ) => {
+    setLoading(true);
+    const res = await getLuffyAI(
+      message,
+      userName,
+      channelName,
+      luffyChatHistory,
+      setLuffyChatHistory
+    );
+    message = res.replace(/\n/g, "<br/>");
+
+    addDocToCollection(collectionRef, {
+      message,
+      timeStamp: serverTimestamp(),
+      user: "モンキー・D・ルフィ",
+      userImage: "",
+    });
+    setLoading(false);
+  };
+
+  return {
+    callGPT,
+    callDra,
+    callNaruto,
+    callGoku,
+    callBakabon,
+    callIkyuu,
+    callLuffy,
+    loading,
+  };
 };

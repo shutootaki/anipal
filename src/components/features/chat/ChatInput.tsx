@@ -17,8 +17,21 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
   const [chatHistory, setChatHistory] = useState<Prompt[]>([]);
   const [draChatHistory, setDraChatHistory] = useState<Prompt[]>([]);
   const [narutoChatHistory, setNarutoChatHistory] = useState<Prompt[]>([]);
+  const [gokuChatHistory, setGokuChatHistory] = useState<Prompt[]>([]);
+  const [bakabonChatHistory, setBakabonChatHistory] = useState<Prompt[]>([]);
+  const [ikyuuChatHistory, setIkyuuChatHistory] = useState<Prompt[]>([]);
+  const [luffyChatHistory, setLuffyChatHistory] = useState<Prompt[]>([]);
   const { channelId, channelName } = channel;
-  const { callGPT, callDra, callNaruto, loading } = useCallGPT(channelName);
+  const {
+    callGPT,
+    callDra,
+    callNaruto,
+    callGoku,
+    callBakabon,
+    callIkyuu,
+    callLuffy,
+    loading,
+  } = useCallGPT(channelName);
 
   const sendMessage = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -46,8 +59,8 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
       callDra(
         message,
         user?.displayName,
-        draChatHistory,
 
+        draChatHistory,
         setDraChatHistory,
         collectionRef
       );
@@ -56,9 +69,45 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
       callNaruto(
         message,
         user?.displayName,
-        narutoChatHistory,
 
+        narutoChatHistory,
         setNarutoChatHistory,
+        collectionRef
+      );
+    }
+    if (channelName === "孫悟空") {
+      callGoku(
+        message,
+        user?.displayName,
+        gokuChatHistory,
+        setGokuChatHistory,
+        collectionRef
+      );
+    }
+    if (channelName === "バカボンのパパ") {
+      callBakabon(
+        message,
+        user?.displayName,
+        bakabonChatHistory,
+        setBakabonChatHistory,
+        collectionRef
+      );
+    }
+    if (channelName === "一休さん") {
+      callIkyuu(
+        message,
+        user?.displayName,
+        ikyuuChatHistory,
+        setIkyuuChatHistory,
+        collectionRef
+      );
+    }
+    if (channelName === "モンキー・D・ルフィ") {
+      callLuffy(
+        message,
+        user?.displayName,
+        luffyChatHistory,
+        setLuffyChatHistory,
         collectionRef
       );
     }
