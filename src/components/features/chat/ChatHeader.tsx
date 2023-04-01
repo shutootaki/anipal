@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../utils/firebase";
+import { characters } from "../../../utils/constants";
 
 export const ChatHeader = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -37,7 +38,7 @@ export const ChatHeader = () => {
         <BsChatRight />
         {channelName}
       </h3>
-      {channelName === "ドラえもん" ?? (
+      {!characters.includes(channelName) && (
         <BsTrash3
           onClick={handleDeleteClick}
           size={20}

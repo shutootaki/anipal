@@ -1,6 +1,4 @@
-import { Characters } from "./types";
-
-export const characters: Characters = [
+export const characters: String[] = [
   "ドラえもん",
   "うずまきナルト",
   "モンキー・D・ルフィ",
