@@ -1,11 +1,15 @@
 import { collection, serverTimestamp } from "firebase/firestore";
 import { FC, useState } from "react";
 import { BsSend } from "react-icons/bs";
+import { GiMagicBroom } from "react-icons/gi";
 import { db } from "../../../utils/firebase";
 import { InitialChannnelState, Prompt, User } from "../../../utils/types";
 import { addDocToCollection } from "./functions/addDocToCollection";
 import { useCallGPT } from "./hooks/useCallGPT";
 import { Spinner } from "../../ui/Spinner";
+import { deleteContext } from "./functions/deleteContext";
+import { Modal } from "../../ui/Modal";
+import { Tooltip } from "@mui/material";
 
 type Props = {
   channel: InitialChannnelState;
@@ -22,6 +26,8 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
   const [ikyuuChatHistory, setIkyuuChatHistory] = useState<Prompt[]>([]);
   const [luffyChatHistory, setLuffyChatHistory] = useState<Prompt[]>([]);
   const { channelId, channelName } = channel;
+  const [chatHistoryForDeletion, setChatHistoryForDeletion] =
+    useState<(chatHistory: Prompt[]) => void>();
   const {
     callGPT,
     callDra,
@@ -58,26 +64,27 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
     }
 
     if (channelName === "ドラえもん") {
+      setChatHistoryForDeletion(setDraChatHistory);
       callDra(
         message,
         user?.displayName,
-
         draChatHistory,
         setDraChatHistory,
         collectionRef
       );
     }
     if (channelName === "うずまきナルト") {
+      setChatHistoryForDeletion(setNarutoChatHistory);
       callNaruto(
         message,
         user?.displayName,
-
         narutoChatHistory,
         setNarutoChatHistory,
         collectionRef
       );
     }
     if (channelName === "孫悟空") {
+      setChatHistoryForDeletion(setGokuChatHistory);
       callGoku(
         message,
         user?.displayName,
@@ -87,6 +94,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
       );
     }
     if (channelName === "バカボンのパパ") {
+      setChatHistoryForDeletion(setBakabonChatHistory);
       callBakabon(
         message,
         user?.displayName,
@@ -96,6 +104,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
       );
     }
     if (channelName === "一休さん") {
+      setChatHistoryForDeletion(setIkyuuChatHistory);
       callIkyuu(
         message,
         user?.displayName,
@@ -105,6 +114,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
       );
     }
     if (channelName === "モンキー・D・ルフィ") {
+      setChatHistoryForDeletion(setLuffyChatHistory);
       callLuffy(
         message,
         user?.displayName,
@@ -127,6 +137,20 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
         </div>
       ) : (
         <form className="flex">
+          <Tooltip title="会話の記憶を消去します">
+            <div>
+              <Modal
+                message="会話の記憶を消去しますか？"
+                onSubmit={(e: React.MouseEvent<HTMLElement>) => {
+                  if (chatHistoryForDeletion) {
+                    deleteContext(e, chatHistoryForDeletion);
+                  }
+                }}
+              >
+                <GiMagicBroom size={24} />
+              </Modal>
+            </div>
+          </Tooltip>
           <input
             type="text"
             placeholder={`メッセージを送信`}
