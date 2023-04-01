@@ -1,7 +1,5 @@
-import { useSelector } from "react-redux";
 import { Prompt } from "../../../../utils/types";
 import { systemPrompt } from "../functions/systemPrompts/systemPrompt";
-import { RootState } from "../../../../store/store";
 
 export const getNarutoAI = async (
   prompt: string,
