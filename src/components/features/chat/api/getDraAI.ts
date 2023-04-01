@@ -1,20 +1,14 @@
-import { useSelector } from "react-redux";
 import { Prompt } from "../../../../utils/types";
 import { systemPrompt } from "../functions/systemPrompts/systemPrompt";
-import { RootState } from "../../../../store/store";
 
 export const getDraAI = async (
   prompt: string,
   userName: string | undefined,
+  channelName: string | null,
   draChatHistory: Prompt[],
   setDraChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>
 ) => {
-  const channelName = useSelector(
-    (state: RootState) => state.channel.channelName
-  );
-  console.log(channelName);
-
-  const doraemonAI = JSON.stringify({
+  const message = JSON.stringify({
     model: "gpt-3.5-turbo",
     messages: draChatHistory.length
       ? [
@@ -34,7 +28,7 @@ export const getDraAI = async (
       "Content-Type": "application/json",
       Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
     },
-    body: doraemonAI,
+    body: message,
   });
   const data = await res.json();
 

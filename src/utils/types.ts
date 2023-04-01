@@ -3,12 +3,7 @@ import { DocumentData } from "firebase/firestore";
 export interface InitialUserState {
   displayName: string;
   photo: string | undefined;
-  user: null | {
-    uid: string;
-    photoURL: string;
-    email: string;
-    displayName: string;
-  };
+  user: User;
   isLoading: boolean;
 }
 
@@ -16,6 +11,13 @@ export interface InitialChannnelState {
   channelId: string | null;
   channelName: string | null;
 }
+
+export type User = {
+  uid: string;
+  photoURL: string;
+  email: string;
+  displayName: string;
+} | null;
 
 export type Channel = {
   id: string;
@@ -27,12 +29,11 @@ export type Prompt = {
   content: string;
 };
 
-export type Characters =
-  | "ドラえもん"
-  | "ラムちゃん"
-  | "うずまきナルト"
-  | "モンキー・D・ルフィ"
-  | "孫悟空"
-  | "空条承太郎"
-  | "バカボンのパパ"
-  | "神楽";
+export type Characters = [
+  "ドラえもん",
+  "うずまきナルト",
+  "モンキー・D・ルフィ",
+  "孫悟空",
+  "バカボンのパパ",
+  "一休さん"
+];
