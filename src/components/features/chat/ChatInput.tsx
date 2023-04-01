@@ -35,11 +35,13 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
 
   const sendMessage = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    if (!message) return;
+    if (!message || !user) return;
 
     const collectionRef = collection(
       db,
-      "channels",
+      "users",
+      user.uid,
+      "privateChannel",
       String(channelId),
       "messages"
     );

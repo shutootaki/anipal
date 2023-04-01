@@ -20,13 +20,16 @@ type Message = {
 
 export const ChatBody = () => {
   const [messages, setMessages] = useState<Message[]>([]);
+  const user = useSelector((state: RootState) => state.user.user);
   const channelId = useSelector((state: RootState) => state.channel.channelId);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let collectionRef = collection(
       db,
-      "channels",
+      "users",
+      String(user?.uid),
+      "privateChannel",
       String(channelId),
       "messages"
     );
