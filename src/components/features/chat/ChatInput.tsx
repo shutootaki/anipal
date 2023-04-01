@@ -1,22 +1,24 @@
 import { collection, serverTimestamp } from "firebase/firestore";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { BsSend } from "react-icons/bs";
-import { useSelector } from "react-redux";
 import { db } from "../../../utils/firebase";
-import { RootState } from "../../../store/store";
-import { Prompt } from "../../../utils/types";
+import { InitialChannnelState, Prompt, User } from "../../../utils/types";
 import { addDocToCollection } from "./functions/addDocToCollection";
 import { useCallGPT } from "./hooks/useCallGPT";
 import { Spinner } from "../../ui/Spinner";
 
-export const ChatInput = () => {
+type Props = {
+  channel: InitialChannnelState;
+  user: User;
+};
+
+export const ChatInput: FC<Props> = ({ channel, user }) => {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState<Prompt[]>([]);
   const [draChatHistory, setDraChatHistory] = useState<Prompt[]>([]);
-  const channel = useSelector((state: RootState) => state.channel);
-  const { callGPT, callDra, loading } = useCallGPT();
-  const user = useSelector((state: RootState) => state.user.user);
+  const [narutoChatHistory, setNarutoChatHistory] = useState<Prompt[]>([]);
   const { channelId, channelName } = channel;
+  const { callGPT, callDra, callNaruto, loading } = useCallGPT(channelName);
 
   const sendMessage = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -40,12 +42,23 @@ export const ChatInput = () => {
       callGPT(message, chatHistory, setChatHistory, collectionRef);
     }
 
-    if (message.startsWith("/dra") || channelName === "ドラえもん") {
+    if (channelName === "ドラえもん") {
       callDra(
         message,
         user?.displayName,
         draChatHistory,
+
         setDraChatHistory,
+        collectionRef
+      );
+    }
+    if (channelName === "うずまきナルト") {
+      callNaruto(
+        message,
+        user?.displayName,
+        narutoChatHistory,
+
+        setNarutoChatHistory,
         collectionRef
       );
     }

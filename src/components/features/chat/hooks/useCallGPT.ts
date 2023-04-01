@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { getDraAI } from "../api/getDraAI";
 import { addDocToCollection } from "../functions/addDocToCollection";
-import { Prompt } from "../../../../utils/types";
+import { InitialChannnelState, Prompt, User } from "../../../../utils/types";
 import {
   CollectionReference,
   DocumentData,
   serverTimestamp,
 } from "firebase/firestore";
 import { getGPT } from "../api/getGPT";
+import { getNarutoAI } from "../api/getNarutoAI";
 
-export const useCallGPT = () => {
+export const useCallGPT = (channelName: string | null) => {
   const [loading, setLoading] = useState(false);
 
   const callGPT = async (
@@ -42,6 +43,7 @@ export const useCallGPT = () => {
     const res = await getDraAI(
       message,
       userName,
+      channelName,
       draChatHistory,
       setDraChatHistory
     );
@@ -56,5 +58,31 @@ export const useCallGPT = () => {
     });
     setLoading(false);
   };
-  return { callGPT, callDra, loading };
+
+  const callNaruto = async (
+    message: string,
+    userName: string | undefined,
+    draChatHistory: Prompt[],
+    setDraChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>,
+    collectionRef: CollectionReference<DocumentData>
+  ) => {
+    setLoading(true);
+    const res = await getNarutoAI(
+      message,
+      userName,
+      channelName,
+      draChatHistory,
+      setDraChatHistory
+    );
+    message = res.replace(/\n/g, "<br/>");
+
+    addDocToCollection(collectionRef, {
+      message,
+      timeStamp: serverTimestamp(),
+      user: "うずまきナルト",
+      userImage: "",
+    });
+    setLoading(false);
+  };
+  return { callGPT, callDra, callNaruto, loading };
 };
