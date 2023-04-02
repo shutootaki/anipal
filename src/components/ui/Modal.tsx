@@ -1,6 +1,7 @@
 import { Button, Backdrop, Fade, Box } from "@mui/material";
 import { Modal as MuiModal } from "@mui/material";
 import { FC, ReactNode, useState } from "react";
+import { UseSnackbar } from "./SnackBar";
 
 const style = {
   position: "absolute" as "absolute",
@@ -20,9 +21,10 @@ type ModalProps = {
 };
 
 export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
 
   return (
     <div>
@@ -32,7 +34,7 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
       <MuiModal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={open}
+        open={modalOpen}
         onClose={handleClose}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
@@ -42,7 +44,7 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
           },
         }}
       >
-        <Fade in={open}>
+        <Fade in={modalOpen}>
           <Box sx={style} className="rounded-lg bg-gray-100">
             <h2
               id="transition-modal-title"
@@ -56,6 +58,7 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
                 onClick={() => {
                   onSubmit();
                   handleClose();
+                  setSnackBarOpen(true);
                 }}
                 className="border-2 border-teal-600 font-bold text-teal-600"
               >
@@ -72,6 +75,11 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
           </Box>
         </Fade>
       </MuiModal>
+      <UseSnackbar
+        snackBarOpen={snackBarOpen}
+        setSnackBarOpen={setSnackBarOpen}
+        message="記憶を削除しました。"
+      />
     </div>
   );
 };
