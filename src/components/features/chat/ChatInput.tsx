@@ -136,8 +136,8 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
           <Spinner />
         </div>
       ) : (
-        <form className="flex">
-          <Tooltip title="会話の記憶を消去します">
+        <form className="flex gap-2">
+          <Tooltip title="会話の記憶を消去します" className="flex items-center">
             <div>
               <Modal
                 message="会話の記憶を消去しますか？"
@@ -147,15 +147,17 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
                   }
                 }}
               >
-                <GiMagicBroom size={24} />
+                <div className="items-center justify-center rounded-full bg-teal-600 p-2 text-white shadow-md transition-colors hover:bg-teal-700">
+                  <GiMagicBroom className="text-lg md:text-2xl" />
+                </div>
               </Modal>
             </div>
           </Tooltip>
           <input
             type="text"
-            placeholder={`メッセージを送信`}
+            placeholder="例) 将来が心配。どうすればいい？"
             value={message}
-            className="mr-2 flex-1 rounded-lg border border-gray-200 px-4 py-2 text-sm focus:outline-none md:text-lg"
+            className="flex-1 rounded-lg border border-gray-200 px-4 py-2 text-sm focus:outline-none md:text-lg"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setMessage(e.target.value)
             }

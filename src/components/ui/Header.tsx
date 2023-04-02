@@ -8,6 +8,7 @@ import { HamburgerMenu } from "./HamburgerMenu";
 import { Channel } from "../../utils/types";
 import { addDocToCollection } from "../features/chat/functions/addDocToCollection";
 import { AiOutlineHeart } from "react-icons/ai";
+import { Modal } from "./Modal";
 
 export const Header = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -50,7 +51,11 @@ export const Header = () => {
           AniPal
         </div>
       </div>
-      {user && <Button onClick={() => auth.signOut()} children="Sign Out" />}
+      {user && (
+        <Modal message="サインアウトしますか？" onSubmit={() => auth.signOut()}>
+          <Button children="Sign Out" />
+        </Modal>
+      )}
     </header>
   );
 };

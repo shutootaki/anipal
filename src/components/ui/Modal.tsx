@@ -7,7 +7,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "50%",
+  width: "auto",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -27,10 +27,7 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
 
   return (
     <div>
-      <Button
-        className="mx-2 rounded-3xl bg-teal-600 py-3 text-center text-white focus:outline-none hover:bg-teal-700"
-        onClick={handleOpen}
-      >
+      <Button onClick={handleOpen} className="min-w-0 p-0">
         {children}
       </Button>
       <MuiModal
@@ -47,8 +44,13 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>
-            <h2 id="transition-modal-title">{message}</h2>
+          <Box sx={style} className="rounded-lg">
+            <h2
+              id="transition-modal-title"
+              className="whitespace-nowrap p-2 px-6 text-center font-bold"
+            >
+              {message}
+            </h2>
             <div className="flex justify-center gap-x-2 pt-10">
               <Button
                 variant="outlined"
@@ -56,10 +58,15 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
                   onSubmit();
                   handleClose();
                 }}
+                className="border-2 border-teal-600 font-bold text-teal-600"
               >
                 Yes
               </Button>
-              <Button variant="outlined" onClick={handleClose}>
+              <Button
+                variant="outlined"
+                onClick={handleClose}
+                className="border-2 border-teal-600 font-bold text-teal-600"
+              >
                 No
               </Button>
             </div>
