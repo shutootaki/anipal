@@ -1,4 +1,4 @@
-import { Sidebar } from "../ui/Sideber";
+import { Sidebar } from "../features/chat/Sideber";
 import { ChatArea } from "../features/chat/ChatArea";
 
 export const ChatPage = () => {
