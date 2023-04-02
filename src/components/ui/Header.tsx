@@ -9,9 +9,11 @@ import { Channel } from "../../utils/types";
 import { addDocToCollection } from "../features/chat/functions/addDocToCollection";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Modal } from "./Modal";
+import { useMobile } from "../../hooks/useMobile";
 
 export const Header = () => {
   const user = useSelector((state: RootState) => state.user.user);
+  const { isMobile } = useMobile();
   const [channels, setChannels] = useState<Channel[]>([]);
 
   const q = query(collection(db, "users", String(user?.uid), "privateChannel"));
@@ -27,7 +29,7 @@ export const Header = () => {
       );
       setChannels(channnelResult);
     });
-  }, []);
+  }, [isMobile]);
 
   const addChannel = async () => {
     const channelName = prompt("チャンネル名を入力してください");
