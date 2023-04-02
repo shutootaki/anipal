@@ -8,12 +8,15 @@ import { HamburgerMenu } from "./HamburgerMenu";
 import { Channel } from "../../utils/types";
 import { addDocToCollection } from "../features/chat/functions/addDocToCollection";
 import { AiOutlineHeart } from "react-icons/ai";
+import { Modal } from "./Modal";
+import { useMobile } from "../../hooks/useMobile";
 
 export const Header = () => {
   const user = useSelector((state: RootState) => state.user.user);
+  const { isMobile } = useMobile();
   const [channels, setChannels] = useState<Channel[]>([]);
 
-  const q = query(collection(db, "channels"));
+  const q = query(collection(db, "users", String(user?.uid), "privateChannel"));
 
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
@@ -26,12 +29,14 @@ export const Header = () => {
       );
       setChannels(channnelResult);
     });
-  }, []);
+  }, [isMobile]);
 
   const addChannel = async () => {
     const channelName = prompt("チャンネル名を入力してください");
-    if (channelName) {
-      addDocToCollection(collection(db, "channels"), { channelName });
+    if (channelName && user) {
+      addDocToCollection(collection(db, "users", user.uid, "privateChannel"), {
+        channelName,
+      });
     }
   };
 
@@ -48,7 +53,11 @@ export const Header = () => {
           AniPal
         </div>
       </div>
-      {user && <Button onClick={() => auth.signOut()} children="Sign Out" />}
+      {user && (
+        <Modal message="サインアウトしますか？" onSubmit={() => auth.signOut()}>
+          <Button children="Sign Out" />
+        </Modal>
+      )}
     </header>
   );
 };

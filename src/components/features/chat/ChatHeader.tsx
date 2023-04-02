@@ -3,16 +3,23 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../utils/firebase";
+import { characters } from "../../../utils/constants";
 
 export const ChatHeader = () => {
-  const channelName = useSelector(
-    (state: RootState) => state.channel.channelName
-  );
-  const channelId = useSelector((state: RootState) => state.channel.channelId);
+  const user = useSelector((state: RootState) => state.user.user);
+  const channel = useSelector((state: RootState) => state.channel);
+
+  const { channelName, channelId } = channel;
 
   const handleDeleteClick = async () => {
     try {
-      const docRef = doc(db, "channels", String(channelId));
+      const docRef = doc(
+        db,
+        "users",
+        String(user?.uid),
+        "privateChannel",
+        String(channelId)
+      );
       if (window.confirm("こちらのチャンネルを削除しますか？")) {
         await deleteDoc(docRef);
         window.location.reload();
@@ -31,11 +38,13 @@ export const ChatHeader = () => {
         <BsChatRight />
         {channelName}
       </h3>
-      <BsTrash3
-        onClick={handleDeleteClick}
-        size={20}
-        className="mr-2 cursor-pointer hover:text-red-400"
-      />
+      {!characters.includes(channelName) && (
+        <BsTrash3
+          onClick={handleDeleteClick}
+          size={20}
+          className="mr-2 cursor-pointer hover:text-red-400"
+        />
+      )}
     </header>
   );
 };

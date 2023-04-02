@@ -2,8 +2,9 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React from "react";
 import { auth, db, storage } from "../../../utils/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { NavigateFunction } from "react-router-dom";
+import { characters } from "../../../utils/constants";
 
 export const onSubmitSignUp = async (
   event: React.FormEvent<HTMLFormElement>,
@@ -32,6 +33,14 @@ export const onSubmitSignUp = async (
             email,
             photoURL: downloadURL,
           });
+          await Promise.all(
+            characters.map(async (character) => {
+              await addDoc(
+                collection(db, "users", res.user.uid, "privateChannel"),
+                { channelName: character }
+              );
+            })
+          );
           setLoading(false);
           navigate("/");
         } catch (err) {

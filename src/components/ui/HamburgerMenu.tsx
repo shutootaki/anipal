@@ -7,10 +7,10 @@ import { Channel } from "../../utils/types";
 
 type Props = {
   channels: Channel[];
-  addChannel: () => Promise<void>;
+  addChannel?: () => Promise<void>;
 };
 
-export function HamburgerMenu({ channels, addChannel }: Props) {
+export const HamburgerMenu = ({ channels }: Props) => {
   const [sidebar, setSidebar] = useState(false);
   const dispatch = useDispatch();
 
@@ -33,11 +33,6 @@ export function HamburgerMenu({ channels, addChannel }: Props) {
           </li>
           <div className="mb-1 flex items-center justify-between px-4">
             <h3 className="text-lg">Chat List</h3>
-            <BsPlusCircle
-              className="cursor-pointer hover:text-gray-500"
-              size={20}
-              onClick={() => addChannel()}
-            />
           </div>
           {channels.map((data) => (
             <div
@@ -50,7 +45,7 @@ export function HamburgerMenu({ channels, addChannel }: Props) {
                   })
                 )
               }
-              className="flex cursor-pointer items-center justify-start gap-2 rounded-md py-2 px-6 text-sm hover:bg-gray-700"
+              className="flex cursor-pointer items-center justify-start gap-2 rounded-md px-6 py-2 text-sm hover:bg-gray-700"
             >
               <BsChatRight />
               <h4 className="flex pb-1">{data.channel.channelName}</h4>
@@ -60,4 +55,4 @@ export function HamburgerMenu({ channels, addChannel }: Props) {
       </nav>
     </>
   );
-}
+};

@@ -1,19 +1,19 @@
 import { Prompt } from "../../../../utils/types";
 import { systemPrompt } from "../functions/systemPrompts/systemPrompt";
 
-export const getDraAI = async (
+export const getNarutoAI = async (
   prompt: string,
   userName: string | undefined,
   channelName: string | null,
-  draChatHistory: Prompt[],
-  setDraChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>
+  narutoChatHistory: Prompt[],
+  setNarutoChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>
 ) => {
   const message = JSON.stringify({
     model: "gpt-3.5-turbo",
-    messages: draChatHistory.length
+    messages: narutoChatHistory.length
       ? [
           systemPrompt(userName, channelName),
-          ...draChatHistory.slice(-2),
+          ...narutoChatHistory.slice(-2),
           { role: "user", content: prompt },
         ]
       : [
@@ -32,8 +32,8 @@ export const getDraAI = async (
   });
   const data = await res.json();
 
-  setDraChatHistory([
-    ...draChatHistory,
+  setNarutoChatHistory([
+    ...narutoChatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 
