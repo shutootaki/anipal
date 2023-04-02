@@ -13,6 +13,12 @@ import { getGokuAI } from "../api/getGokuAI";
 import { getLuffyAI } from "../api/getLuffyAI";
 import { getIkkyuAI } from "../api/getIkkyuAI";
 import { getBakabonAI } from "../api/getBakabonAI";
+import draemon from "../../../../assets/draemon.jpg";
+import luffy from "../../../../assets/luffy.jpg";
+import naruto from "../../../../assets/naruto.jpg";
+import goku from "../../../../assets/goku.jpg";
+import ikkyu from "../../../../assets/ikkyuu.jpg";
+import bakabon from "../../../../assets/bakabon.jpg";
 
 export const useCallGPT = (channelName: string | null) => {
   const [loading, setLoading] = useState(false);
@@ -57,8 +63,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "ドラえもんAI",
-      userImage:
-        "https://thumb.ac-illust.com/ed/ed523fd6ea04642139061649aab5376d_t.jpeg",
+      userImage: draemon,
     });
     setLoading(false);
   };
@@ -84,7 +89,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "うずまきナルト",
-      userImage: "",
+      userImage: naruto,
     });
     setLoading(false);
   };
@@ -110,7 +115,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "孫悟空",
-      userImage: "",
+      userImage: goku,
     });
     setLoading(false);
   };
@@ -136,7 +141,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "バカボンのパパ",
-      userImage: "",
+      userImage: bakabon,
     });
     setLoading(false);
   };
@@ -162,7 +167,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "一休さん",
-      userImage: "",
+      userImage: ikkyu,
     });
     setLoading(false);
   };
@@ -188,7 +193,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "モンキー・D・ルフィ",
-      userImage: "",
+      userImage: luffy,
     });
     setLoading(false);
   };
