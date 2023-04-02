@@ -29,7 +29,7 @@ export const Header = () => {
       );
       setChannels(channnelResult);
     });
-  }, [isMobile]);
+  }, [isMobile, user]);
 
   const addChannel = async () => {
     const channelName = prompt("チャンネル名を入力してください");
