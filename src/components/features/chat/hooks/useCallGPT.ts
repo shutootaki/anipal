@@ -55,7 +55,7 @@ export const useCallGPT = (channelName: string | null) => {
     addDocToCollection(collectionRef, {
       message,
       timeStamp: serverTimestamp(),
-      user: "ドラえもんAI",
+      user: "ドラえもん",
       userImage: "/assets/draemon.jpg",
     });
     setLoading(false);
