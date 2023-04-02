@@ -37,3 +37,7 @@ export type Characters = [
   "バカボンのパパ",
   "一休さん"
 ];
+
+export type CharacterImage = {
+  [key: string]: string;
+};
