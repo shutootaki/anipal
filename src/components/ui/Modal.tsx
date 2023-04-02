@@ -8,7 +8,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "auto",
-  bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
@@ -44,7 +43,7 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
         }}
       >
         <Fade in={open}>
-          <Box sx={style} className="rounded-lg">
+          <Box sx={style} className="rounded-lg bg-gray-100">
             <h2
               id="transition-modal-title"
               className="whitespace-nowrap p-2 px-6 text-center font-bold"
