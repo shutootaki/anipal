@@ -32,8 +32,8 @@ export const getBakabonAI = async (
   });
   const data = await res.json();
 
-  setBakabonChatHistory((prevChatHistory) => [
-    ...prevChatHistory,
+  setBakabonChatHistory([
+    ...bakabonChatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 

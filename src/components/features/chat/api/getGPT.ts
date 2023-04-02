@@ -22,8 +22,8 @@ export const getGPT = async (
   });
   const data = await res.json();
 
-  setChatHistory((prevChatHistory) => [
-    ...prevChatHistory,
+  setChatHistory([
+    ...chatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 

@@ -32,8 +32,8 @@ export const getLuffyAI = async (
   });
   const data = await res.json();
 
-  setLuffyChatHistory((prevChatHistory) => [
-    ...prevChatHistory,
+  setLuffyChatHistory([
+    ...luffyChatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 

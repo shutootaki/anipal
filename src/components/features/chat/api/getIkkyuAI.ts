@@ -32,8 +32,8 @@ export const getIkkyuAI = async (
   });
   const data = await res.json();
 
-  setIkkyuChatHistory((prevChatHistory) => [
-    ...prevChatHistory,
+  setIkkyuChatHistory([
+    ...ikkyuChatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 

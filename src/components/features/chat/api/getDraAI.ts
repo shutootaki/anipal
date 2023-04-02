@@ -32,8 +32,8 @@ export const getDraAI = async (
   });
   const data = await res.json();
 
-  setDraChatHistory((prevChatHistory) => [
-    ...prevChatHistory,
+  setDraChatHistory([
+    ...draChatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 

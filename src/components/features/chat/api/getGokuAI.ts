@@ -32,8 +32,8 @@ export const getGokuAI = async (
   });
   const data = await res.json();
 
-  setGokuChatHistory((prevChatHistory) => [
-    ...prevChatHistory,
+  setGokuChatHistory([
+    ...gokuChatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 

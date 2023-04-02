@@ -32,8 +32,8 @@ export const getNarutoAI = async (
   });
   const data = await res.json();
 
-  setNarutoChatHistory((prevChatHistory) => [
-    ...prevChatHistory,
+  setNarutoChatHistory([
+    ...narutoChatHistory,
     { role: "assistant", content: data.choices[0].message.content },
   ]);
 
