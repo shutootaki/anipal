@@ -13,13 +13,6 @@ import { getGokuAI } from "../api/getGokuAI";
 import { getLuffyAI } from "../api/getLuffyAI";
 import { getIkkyuAI } from "../api/getIkkyuAI";
 import { getBakabonAI } from "../api/getBakabonAI";
-import draemon from "../../../../assets/draemon.jpg";
-import luffy from "../../../../assets/luffy.jpg";
-import naruto from "../../../../assets/naruto.jpg";
-import goku from "../../../../assets/goku.jpg";
-import ikkyu from "../../../../assets/ikkyuu.jpg";
-import bakabon from "../../../../assets/bakabon.jpg";
-
 export const useCallGPT = (channelName: string | null) => {
   const [loading, setLoading] = useState(false);
 
@@ -63,7 +56,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "ドラえもんAI",
-      userImage: draemon,
+      userImage: "/assets/draemon.jpg",
     });
     setLoading(false);
   };
@@ -89,7 +82,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "うずまきナルト",
-      userImage: naruto,
+      userImage: "/assets/naruto.jpg",
     });
     setLoading(false);
   };
@@ -115,7 +108,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "孫悟空",
-      userImage: goku,
+      userImage: "/assets/goku.jpg",
     });
     setLoading(false);
   };
@@ -141,7 +134,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "バカボンのパパ",
-      userImage: bakabon,
+      userImage: "/assets/bakabon.jpg",
     });
     setLoading(false);
   };
@@ -167,7 +160,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "一休さん",
-      userImage: ikkyu,
+      userImage: "/assets/ikkyuu.jpg",
     });
     setLoading(false);
   };
@@ -193,7 +186,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       timeStamp: serverTimestamp(),
       user: "モンキー・D・ルフィ",
-      userImage: luffy,
+      userImage: "/assets/luffy.jpg",
     });
     setLoading(false);
   };

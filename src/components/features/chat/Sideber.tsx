@@ -9,6 +9,7 @@ import { Channel } from "../../../utils/types";
 import { RootState } from "../../../store/store";
 import { Avatar } from "@mui/material";
 import { characterImage } from "../../../utils/constants";
+import { AiOutlineUnorderedList } from "react-icons/ai";
 
 export const Sidebar = () => {
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -51,10 +52,13 @@ export const Sidebar = () => {
   return (
     <nav className="hidden  flex-col bg-gray-800 p-2 font-semibold text-white md:flex md:w-1/5">
       <div className="flex items-center justify-between p-2 text-center text-white ">
-        <h3 className="hidden md:flex md:text-lg">Chat List</h3>
+        <h3 className="hidden items-center gap-1 md:flex md:text-lg">
+          <AiOutlineUnorderedList />
+          Chat List
+        </h3>
       </div>
       {channels.map((channel) => {
-        const test = channel.channel.channelName;
+        const channelName = channel.channel.channelName;
         return (
           <div
             className="flex cursor-pointer items-center gap-2 rounded-md py-2 pl-2 text-sm hover:bg-gray-700 sm:px-5"
@@ -63,13 +67,15 @@ export const Sidebar = () => {
               dispatch(
                 setChannelInfo({
                   channelId: channel.id,
-                  channelName: channel.channel.channelName,
+                  channelName,
                 })
               )
             }
           >
-            <Avatar src={characterImage[test]} sx={{ width: 24, height: 24 }} />
-            <BsChatRight />
+            <Avatar
+              src={characterImage[channelName]}
+              sx={{ width: 32, height: 32 }}
+            />
             <h4 className="hidden pb-1 md:flex">
               {channel.channel.channelName}
             </h4>

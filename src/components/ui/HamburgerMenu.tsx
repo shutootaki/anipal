@@ -4,6 +4,8 @@ import { setChannelInfo } from "../../store/channelSlice";
 import { BsChatRight, BsList, BsPlusCircle } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { Channel } from "../../utils/types";
+import { Avatar } from "@mui/material";
+import { characterImage } from "../../utils/constants";
 
 type Props = {
   channels: Channel[];
@@ -34,23 +36,30 @@ export const HamburgerMenu = ({ channels }: Props) => {
           <div className="mb-1 flex items-center justify-between px-4">
             <h3 className="text-lg">Chat List</h3>
           </div>
-          {channels.map((data) => (
-            <div
-              key={data.id}
-              onClick={() =>
-                dispatch(
-                  setChannelInfo({
-                    channelId: data.id,
-                    channelName: data.channel.channelName,
-                  })
-                )
-              }
-              className="flex cursor-pointer items-center justify-start gap-2 rounded-md px-6 py-2 text-sm hover:bg-gray-700"
-            >
-              <BsChatRight />
-              <h4 className="flex pb-1">{data.channel.channelName}</h4>
-            </div>
-          ))}
+          {channels.map((data) => {
+            const channelName = data.channel.channelName;
+            return (
+              <div
+                key={data.id}
+                onClick={() =>
+                  dispatch(
+                    setChannelInfo({
+                      channelId: data.id,
+                      channelName,
+                    })
+                  )
+                }
+                className="flex cursor-pointer items-center justify-start gap-2 rounded-md px-6 py-2 text-sm hover:bg-gray-700"
+              >
+                <Avatar
+                  src={characterImage[channelName]}
+                  sx={{ width: 24, height: 24 }}
+                />
+
+                <h4 className="flex pb-1">{data.channel.channelName}</h4>
+              </div>
+            );
+          })}
         </ul>
       </nav>
     </>
