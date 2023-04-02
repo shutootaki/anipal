@@ -130,7 +130,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
   if (channelId == null) return null;
 
   return (
-    <div className="ml-2 items-center justify-start p-2 shadow-md md:mx-16">
+    <div className="items-center justify-start p-2 shadow-md md:mx-16">
       {loading ? (
         <div className="flex justify-center">
           <Spinner />
