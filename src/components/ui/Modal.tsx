@@ -33,7 +33,6 @@ export const Modal: FC<ModalProps> = ({
   onSubmit,
   onClose,
 }) => {
-  // const [modalOpen, setModalOpen] = useState(false);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const handleOpen = () => setModalOpen(true);
 

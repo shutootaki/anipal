@@ -10,6 +10,7 @@ import { Spinner } from "../../ui/Spinner";
 import { deleteContext } from "./functions/deleteContext";
 import { Modal } from "../../ui/Modal";
 import { Tooltip } from "@mui/material";
+import { MessageBox } from "../../ui/MessageBox";
 
 type Props = {
   channel: InitialChannnelState;
@@ -25,6 +26,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
   const [bakabonChatHistory, setBakabonChatHistory] = useState<Prompt[]>([]);
   const [ikyuuChatHistory, setIkyuuChatHistory] = useState<Prompt[]>([]);
   const [luffyChatHistory, setLuffyChatHistory] = useState<Prompt[]>([]);
+  const [error, setError] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const { channelId, channelName } = channel;
   const [chatHistoryForDeletion, setChatHistoryForDeletion] =
@@ -38,7 +40,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
     callIkyuu,
     callLuffy,
     loading,
-  } = useCallGPT(channelName);
+  } = useCallGPT(channelName, setError);
 
   const sendMessage = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -129,6 +131,14 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
   };
 
   if (channelId == null) return null;
+  if (error)
+    return (
+      <div className="absolute top-1/3 mx-5	md:right-1/4">
+        <MessageBox title={error}>
+          リロードの後、再度やり直してください
+        </MessageBox>
+      </div>
+    );
 
   return (
     <div className="items-center justify-start p-2 shadow-md md:mx-16">
