@@ -25,6 +25,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
   const [bakabonChatHistory, setBakabonChatHistory] = useState<Prompt[]>([]);
   const [ikyuuChatHistory, setIkyuuChatHistory] = useState<Prompt[]>([]);
   const [luffyChatHistory, setLuffyChatHistory] = useState<Prompt[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
   const { channelId, channelName } = channel;
   const [chatHistoryForDeletion, setChatHistoryForDeletion] =
     useState<(chatHistory: Prompt[]) => void>();
@@ -141,16 +142,19 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
             <div>
               <Modal
                 message="会話の記憶を消去しますか？"
+                openComponent={
+                  <div className="items-center justify-center rounded-full bg-teal-600 p-2 text-white shadow-md transition-colors hover:bg-teal-700">
+                    <GiMagicBroom className="text-lg md:text-2xl" />
+                  </div>
+                }
+                modalOpen={modalOpen}
+                setModalOpen={setModalOpen}
                 onSubmit={(e: React.MouseEvent<HTMLElement>) => {
                   if (chatHistoryForDeletion) {
                     deleteContext(e, chatHistoryForDeletion);
                   }
                 }}
-              >
-                <div className="items-center justify-center rounded-full bg-teal-600 p-2 text-white shadow-md transition-colors hover:bg-teal-700">
-                  <GiMagicBroom className="text-lg md:text-2xl" />
-                </div>
-              </Modal>
+              ></Modal>
             </div>
           </Tooltip>
           <input
