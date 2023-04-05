@@ -12,18 +12,17 @@ export const Profile = () => {
   const handleClose = () => setModalOpen(false);
 
   return (
-    <div className="flex w-full items-center justify-between border-t-2 p-1">
+    <div className="absolute bottom-0 left-0 flex w-full items-center justify-between border-t bg-gray-800 p-2">
       <div className="flex items-center">
         <Avatar src={user?.photoURL} />
         <div className="pl-2">
           <p className="text-xs">{user?.displayName}</p>
         </div>
       </div>
-
       <Tooltip title="設定" className="flex items-center">
         <div>
           <Modal
-            message="プロフィール編集画面"
+            message="⚙️⚙️プロフィール編集画面⚙️⚙️"
             openComponent={
               <AiTwotoneSetting
                 size={24}

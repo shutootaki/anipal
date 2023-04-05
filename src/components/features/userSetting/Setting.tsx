@@ -21,21 +21,21 @@ export const Setting = ({ handleClose }: any) => {
   return (
     <div>
       <div>
-        <h4 className="pb-2">ニックネーム</h4>
+        <h4 className="pb-2 font-bold">ニックネーム</h4>
         <TextField
           value={user?.displayName}
           onChange={(e) => setNewUserName(e.target.value)}
-          className="min-w-[320px]"
+          className="min-w-[300px]"
         />
       </div>
       <div>
-        <h4 className="py-2">APIキー</h4>
+        <h4 className="py-2 font-bold">APIキー</h4>
         <TextField
           type="password"
           placeholder="OpenAIのAPIキーを入力してください"
           value={apiKey ? apiKey : newApiKey}
           onChange={(e) => setNewApiKey(e.target.value)}
-          className="min-w-[320px]"
+          className="min-w-[300px]"
         />
       </div>
       <div className="mt-6 flex justify-center">

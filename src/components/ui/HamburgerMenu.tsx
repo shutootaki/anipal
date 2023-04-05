@@ -6,6 +6,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Channel } from "../../utils/types";
 import { Avatar } from "@mui/material";
 import { characterImage } from "../../utils/constants";
+import { Profile } from "../features/userSetting/Profile";
 
 type Props = {
   channels: Channel[];
@@ -29,7 +30,7 @@ export const HamburgerMenu = ({ channels }: Props) => {
           sidebar ? "left-0" : "-left-full"
         }`}
       >
-        <ul className="w-full" onClick={() => setSidebar(!sidebar)}>
+        <ul className="relative w-full" onClick={() => setSidebar(!sidebar)}>
           <li className="flex w-full cursor-pointer items-center p-4 hover:text-gray-500">
             <AiOutlineClose size={20} />
           </li>
@@ -55,11 +56,11 @@ export const HamburgerMenu = ({ channels }: Props) => {
                   src={characterImage[channelName]}
                   sx={{ width: 24, height: 24 }}
                 />
-
                 <h4 className="flex pb-1">{data.channel.channelName}</h4>
               </div>
             );
           })}
+          <Profile />
         </ul>
       </nav>
     </>

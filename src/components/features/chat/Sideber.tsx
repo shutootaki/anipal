@@ -1,5 +1,4 @@
-import { BsChatRight, BsPlusCircle } from "react-icons/bs";
-import { addDoc, collection, doc, query } from "firebase/firestore";
+import { addDoc, collection, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../../utils/firebase";
 import { onSnapshot } from "firebase/firestore";
@@ -10,6 +9,7 @@ import { RootState } from "../../../store/store";
 import { Avatar } from "@mui/material";
 import { characterImage } from "../../../utils/constants";
 import { AiOutlineUnorderedList } from "react-icons/ai";
+import { Profile } from "../userSetting/Profile";
 
 export const Sidebar = () => {
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -50,7 +50,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <nav className="hidden  flex-col bg-gray-800 p-2 font-semibold text-white md:flex md:w-1/5">
+    <nav className="relative  hidden flex-col bg-gray-800 p-2 font-semibold text-white md:flex md:w-1/5">
       <div className="flex items-center justify-between p-2 text-center text-white ">
         <h3 className="hidden items-center gap-1 md:flex md:text-lg">
           <AiOutlineUnorderedList />
@@ -82,6 +82,7 @@ export const Sidebar = () => {
           </div>
         );
       })}
+      <Profile />
     </nav>
   );
 };
