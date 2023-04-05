@@ -5,6 +5,7 @@ export const getGokuAI = async (
   prompt: string,
   userName: string | undefined,
   channelName: string | null,
+  apiKey: string | null,
   gokuChatHistory: Prompt[],
   setGokuChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>
 ) => {
@@ -26,7 +27,7 @@ export const getGokuAI = async (
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
     },
     body: message,
   });

@@ -13,8 +13,11 @@ import { getGokuAI } from "../api/getGokuAI";
 import { getLuffyAI } from "../api/getLuffyAI";
 import { getIkkyuAI } from "../api/getIkkyuAI";
 import { getBakabonAI } from "../api/getBakabonAI";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
 export const useCallGPT = (channelName: string | null) => {
   const [loading, setLoading] = useState(false);
+  const apiKey = useSelector((state: RootState) => state.key.apiKey);
 
   const callGPT = async (
     message: string,
@@ -47,6 +50,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       draChatHistory,
       setDraChatHistory
     );
@@ -73,6 +77,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       narutoChatHistory,
       setNarutoChatHistory
     );
@@ -99,6 +104,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       gokuChatHistory,
       setGokuChatHistory
     );
@@ -125,6 +131,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       bakabonChatHistory,
       setBakabonChatHistory
     );
@@ -151,6 +158,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       ikyuuChatHistory,
       setIkyuuChatHistory
     );
@@ -177,6 +185,7 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       luffyChatHistory,
       setLuffyChatHistory
     );

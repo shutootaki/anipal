@@ -5,6 +5,7 @@ export const getLuffyAI = async (
   prompt: string,
   userName: string | undefined,
   channelName: string | null,
+  apiKey: string | null,
   luffyChatHistory: Prompt[],
   setLuffyChatHistory: React.Dispatch<React.SetStateAction<Prompt[]>>
 ) => {
@@ -26,7 +27,7 @@ export const getLuffyAI = async (
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
     },
     body: message,
   });
