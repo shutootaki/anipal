@@ -11,6 +11,9 @@ export interface InitialChannnelState {
   channelId: string | null;
   channelName: string | null;
 }
+export interface InitialKeyState {
+  apiKey: string | null;
+}
 
 export type User = {
   uid: string;

@@ -15,27 +15,37 @@ const style = {
 };
 
 type ModalProps = {
-  children: ReactNode;
+  openComponent: ReactNode;
+  children?: ReactNode;
   message: string;
-  onSubmit: any;
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onSubmit?: any;
+  onClose?: () => void;
 };
 
-export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+export const Modal: FC<ModalProps> = ({
+  children,
+  message,
+  modalOpen,
+  setModalOpen,
+  openComponent,
+  onSubmit,
+  onClose,
+}) => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const handleOpen = () => setModalOpen(true);
-  const handleClose = () => setModalOpen(false);
 
   return (
     <div>
-      <Button onClick={handleOpen} className="min-w-0 p-0">
-        {children}
-      </Button>
+      <div onClick={handleOpen} className="min-w-0 p-0">
+        {openComponent}
+      </div>
       <MuiModal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={modalOpen}
-        onClose={handleClose}
+        onClose={onClose ? onClose : () => setModalOpen(false)}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -53,24 +63,32 @@ export const Modal: FC<ModalProps> = ({ children, message, onSubmit }) => {
               {message}
             </h2>
             <div className="flex justify-center gap-x-2 pt-10">
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  onSubmit();
-                  handleClose();
-                  setSnackBarOpen(true);
-                }}
-                className="border-2 border-teal-600 font-bold text-teal-600"
-              >
-                Yes
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={handleClose}
-                className="border-2 border-teal-600 font-bold text-teal-600"
-              >
-                No
-              </Button>
+              {children ? (
+                children
+              ) : (
+                <>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      onSubmit();
+                      onClose ? onClose() : setModalOpen(false);
+                      setSnackBarOpen(true);
+                    }}
+                    className="border-2 border-teal-600 font-bold text-teal-600"
+                  >
+                    Yes
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      onClose ? onClose() : setModalOpen(false);
+                    }}
+                    className="border-2 border-teal-600 font-bold text-teal-600"
+                  >
+                    No
+                  </Button>
+                </>
+              )}
             </div>
           </Box>
         </Fade>

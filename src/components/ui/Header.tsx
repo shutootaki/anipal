@@ -13,6 +13,7 @@ import { useMobile } from "../../hooks/useMobile";
 
 export const Header = () => {
   const user = useSelector((state: RootState) => state.user.user);
+  const [modalOpen, setModalOpen] = useState(false);
   const { isMobile } = useMobile();
   const [channels, setChannels] = useState<Channel[]>([]);
 
@@ -54,9 +55,13 @@ export const Header = () => {
         </div>
       </div>
       {user && (
-        <Modal message="サインアウトしますか？" onSubmit={() => auth.signOut()}>
-          <Button children="Sign Out" />
-        </Modal>
+        <Modal
+          message="サインアウトしますか？"
+          openComponent={<Button children="Sign Out" />}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          onSubmit={() => auth.signOut()}
+        ></Modal>
       )}
     </header>
   );

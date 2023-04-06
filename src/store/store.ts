@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../store/userSlice";
 import channelReducer from "../store/channelSlice";
+import keyReducer from "../store/keySlice";
 import {
   useSelector as rawUseSelector,
   TypedUseSelectorHook,
@@ -10,6 +11,7 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     channel: channelReducer,
+    key: keyReducer,
   },
 });
 

@@ -13,8 +13,15 @@ import { getGokuAI } from "../api/getGokuAI";
 import { getLuffyAI } from "../api/getLuffyAI";
 import { getIkkyuAI } from "../api/getIkkyuAI";
 import { getBakabonAI } from "../api/getBakabonAI";
-export const useCallGPT = (channelName: string | null) => {
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
+
+export const useCallGPT = (
+  channelName: string | null,
+  setError: React.Dispatch<React.SetStateAction<string>>
+) => {
   const [loading, setLoading] = useState(false);
+  const apiKey = useSelector((state: RootState) => state.key.apiKey);
 
   const callGPT = async (
     message: string,
@@ -47,8 +54,10 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       draChatHistory,
-      setDraChatHistory
+      setDraChatHistory,
+      setError
     );
     message = res.replace(/\n/g, "<br/>");
 
@@ -73,8 +82,10 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       narutoChatHistory,
-      setNarutoChatHistory
+      setNarutoChatHistory,
+      setError
     );
     message = res.replace(/\n/g, "<br/>");
 
@@ -99,8 +110,10 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       gokuChatHistory,
-      setGokuChatHistory
+      setGokuChatHistory,
+      setError
     );
     message = res.replace(/\n/g, "<br/>");
 
@@ -125,8 +138,10 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       bakabonChatHistory,
-      setBakabonChatHistory
+      setBakabonChatHistory,
+      setError
     );
     message = res.replace(/\n/g, "<br/>");
 
@@ -151,8 +166,10 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       ikyuuChatHistory,
-      setIkyuuChatHistory
+      setIkyuuChatHistory,
+      setError
     );
     message = res.replace(/\n/g, "<br/>");
 
@@ -177,8 +194,10 @@ export const useCallGPT = (channelName: string | null) => {
       message,
       userName,
       channelName,
+      apiKey,
       luffyChatHistory,
-      setLuffyChatHistory
+      setLuffyChatHistory,
+      setError
     );
     message = res.replace(/\n/g, "<br/>");
 
