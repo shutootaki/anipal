@@ -34,12 +34,6 @@ export const getDraAI = async (
       body: message,
     });
 
-    if (!apiKey) {
-      return setError(
-        "APIキーが設定されていません。設定画面からAPIキーを設定してください。"
-      );
-    }
-
     if (!res.ok) {
       setError(`API request failed with status ${res.status}`);
     }

@@ -34,7 +34,6 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
   const [chatHistoryForDeletion, setChatHistoryForDeletion] =
     useState<(chatHistory: Prompt[]) => void>();
   const apiKey = useSelector((state: RootState) => state.key.apiKey);
-
   const {
     callGPT,
     callDra,
@@ -45,6 +44,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
     callLuffy,
     loading,
   } = useCallGPT(channelName, setError);
+  const isDra = channelName === "ドラえもん";
 
   const sendMessage = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -154,7 +154,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
         <form className="flex gap-2">
           <Tooltip
             title="会話の記憶を消去します"
-            className={apiKey ? "flex items-center" : "hidden"}
+            className={apiKey || isDra ? "flex items-center" : "hidden"}
           >
             <div>
               <Modal
@@ -162,7 +162,7 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
                 openComponent={
                   <div
                     className={
-                      apiKey
+                      apiKey || isDra
                         ? "items-center justify-center rounded-full bg-teal-600 p-2 text-white shadow-md transition-colors hover:bg-teal-700"
                         : "items-center justify-center rounded-full bg-gray-400 p-2 text-white shadow-md transition-colors"
                     }
@@ -183,27 +183,26 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
           <input
             type="text"
             placeholder={
-              apiKey
+              apiKey || isDra
                 ? "例) 将来が心配。どうすればいい？"
                 : "APIキーを登録してください"
             }
             value={message}
-            disabled={!apiKey}
+            disabled={!apiKey && !isDra}
             className={
-              apiKey
+              apiKey || isDra
                 ? "flex-1 rounded-lg border border-gray-200 px-4 py-2 text-sm focus:outline-none md:text-lg"
                 : "flex-1 rounded-lg border bg-gray-600 px-4 py-2 text-sm focus:outline-none md:text-lg"
             }
-            // "flex-1 rounded-lg border border-gray-200 px-4 py-2 text-sm focus:outline-none md:text-lg"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setMessage(e.target.value)
             }
           />
           <button
             type="submit"
-            disabled={!apiKey}
+            disabled={!apiKey && !isDra}
             className={
-              apiKey
+              apiKey || isDra
                 ? "rounded-lg bg-teal-600 px-4 py-2 text-white focus:outline-none hover:bg-teal-700"
                 : "rounded-lg bg-teal-900 px-4 py-2 text-white "
             }
