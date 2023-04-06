@@ -11,6 +11,8 @@ import { deleteContext } from "./functions/deleteContext";
 import { Modal } from "../../ui/Modal";
 import { Tooltip } from "@mui/material";
 import { MessageBox } from "../../ui/MessageBox";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 type Props = {
   channel: InitialChannnelState;
@@ -31,6 +33,8 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
   const { channelId, channelName } = channel;
   const [chatHistoryForDeletion, setChatHistoryForDeletion] =
     useState<(chatHistory: Prompt[]) => void>();
+  const apiKey = useSelector((state: RootState) => state.key.apiKey);
+
   const {
     callGPT,
     callDra,
@@ -148,12 +152,21 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
         </div>
       ) : (
         <form className="flex gap-2">
-          <Tooltip title="会話の記憶を消去します" className="flex items-center">
+          <Tooltip
+            title="会話の記憶を消去します"
+            className={apiKey ? "flex items-center" : "hidden"}
+          >
             <div>
               <Modal
                 message="会話の記憶を消去しますか？"
                 openComponent={
-                  <div className="items-center justify-center rounded-full bg-teal-600 p-2 text-white shadow-md transition-colors hover:bg-teal-700">
+                  <div
+                    className={
+                      apiKey
+                        ? "items-center justify-center rounded-full bg-teal-600 p-2 text-white shadow-md transition-colors hover:bg-teal-700"
+                        : "items-center justify-center rounded-full bg-gray-400 p-2 text-white shadow-md transition-colors"
+                    }
+                  >
                     <GiMagicBroom className="text-lg md:text-2xl" />
                   </div>
                 }
@@ -169,16 +182,31 @@ export const ChatInput: FC<Props> = ({ channel, user }) => {
           </Tooltip>
           <input
             type="text"
-            placeholder="例) 将来が心配。どうすればいい？"
+            placeholder={
+              apiKey
+                ? "例) 将来が心配。どうすればいい？"
+                : "APIキーを登録してください"
+            }
             value={message}
-            className="flex-1 rounded-lg border border-gray-200 px-4 py-2 text-sm focus:outline-none md:text-lg"
+            disabled={!apiKey}
+            className={
+              apiKey
+                ? "flex-1 rounded-lg border border-gray-200 px-4 py-2 text-sm focus:outline-none md:text-lg"
+                : "flex-1 rounded-lg border bg-gray-600 px-4 py-2 text-sm focus:outline-none md:text-lg"
+            }
+            // "flex-1 rounded-lg border border-gray-200 px-4 py-2 text-sm focus:outline-none md:text-lg"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setMessage(e.target.value)
             }
           />
           <button
             type="submit"
-            className="rounded-lg bg-teal-600 px-4 py-2 text-white focus:outline-none hover:bg-teal-700"
+            disabled={!apiKey}
+            className={
+              apiKey
+                ? "rounded-lg bg-teal-600 px-4 py-2 text-white focus:outline-none hover:bg-teal-700"
+                : "rounded-lg bg-teal-900 px-4 py-2 text-white "
+            }
             onClick={(e: React.MouseEvent<HTMLElement>) => sendMessage(e)}
           >
             <BsSend />
