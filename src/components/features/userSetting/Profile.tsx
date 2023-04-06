@@ -1,4 +1,4 @@
-import { Avatar, Tooltip } from "@mui/material";
+import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { AiTwotoneSetting } from "react-icons/ai";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setChannelInfo } from "../../store/channelSlice";
-import { BsChatRight, BsList, BsPlusCircle } from "react-icons/bs";
+import { BsList } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { Channel } from "../../utils/types";
 import { Avatar } from "@mui/material";

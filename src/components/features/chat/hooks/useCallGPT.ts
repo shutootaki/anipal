@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { useState } from "react";
 import { getDraAI } from "../api/getDraAI";
 import { addDocToCollection } from "../functions/addDocToCollection";
 import { Prompt } from "../../../../utils/types";
