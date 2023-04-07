@@ -5,10 +5,12 @@ import { Button } from "../../ui/Button";
 import { setKey } from "../../../store/keySlice";
 import { useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
+import { useMobile } from "../../../hooks/useMobile";
 
 export const Setting = ({ handleClose }: any) => {
   const [newApiKey, setNewApiKey] = useState<string>("");
   const apiKey = useSelector((state: RootState) => state.key.apiKey);
+  const { isMobile } = useMobile();
   const dispatch = useDispatch();
 
   const onClickSubmit = () => {
@@ -29,13 +31,13 @@ export const Setting = ({ handleClose }: any) => {
           placeholder="APIキーを入力してください"
           value={apiKey ? apiKey : newApiKey}
           onChange={(e) => setNewApiKey(e.target.value)}
-          className="min-w-[280px]"
+          className="w-[240px] md:w-[360px]"
           size="small"
         />
         <Tooltip title="APIキーを削除します">
           <div>
             <BsTrash3
-              size={24}
+              size={isMobile ? 24 : 28}
               onClick={onClickDelete}
               className="cursor-pointer hover:text-gray-500"
             />
