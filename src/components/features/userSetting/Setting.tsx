@@ -25,19 +25,19 @@ export const Setting = ({ handleClose }: any) => {
 
   return (
     <div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <TextField
           type="password"
-          placeholder="APIキーを入力してください"
+          placeholder="OpenAI APIKey"
           value={apiKey ? apiKey : newApiKey}
           onChange={(e) => setNewApiKey(e.target.value)}
-          className="w-[240px] md:w-[360px]"
+          className="w-[200px] md:w-[360px]"
           size="small"
         />
         <Tooltip title="APIキーを削除します">
           <div>
             <BsTrash3
-              size={isMobile ? 24 : 28}
+              size={isMobile ? 20 : 28}
               onClick={onClickDelete}
               className="cursor-pointer hover:text-gray-500"
             />

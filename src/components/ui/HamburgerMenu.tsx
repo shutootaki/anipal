@@ -7,6 +7,8 @@ import { Channel } from "../../utils/types";
 import { Avatar } from "@mui/material";
 import { characterImage } from "../../utils/constants";
 import { Profile } from "../features/userSetting/Profile";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 type Props = {
   channels: Channel[];
@@ -16,6 +18,7 @@ type Props = {
 export const HamburgerMenu = ({ channels }: Props) => {
   const [sidebar, setSidebar] = useState(false);
   const dispatch = useDispatch();
+  const apiKey = useSelector((state: RootState) => state.key.apiKey);
 
   return (
     <>
@@ -50,7 +53,11 @@ export const HamburgerMenu = ({ channels }: Props) => {
                     })
                   )
                 }
-                className="flex cursor-pointer items-center justify-start gap-2 rounded-md px-6 py-2 text-sm hover:bg-gray-700"
+                className={
+                  apiKey || channelName === "ドラえもん"
+                    ? "flex cursor-pointer items-center justify-start gap-2 rounded-md px-6 py-2 text-sm hover:bg-gray-700"
+                    : "flex cursor-pointer items-center justify-start gap-2 rounded-md px-6 py-2 text-sm text-gray-600"
+                }
               >
                 <Avatar
                   src={characterImage[channelName]}
