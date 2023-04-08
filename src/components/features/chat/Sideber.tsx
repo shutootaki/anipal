@@ -14,6 +14,7 @@ import { Profile } from "../userSetting/Profile";
 export const Sidebar = () => {
   const [channels, setChannels] = useState<Channel[]>([]);
   const user = useSelector((state: RootState) => state.user.user);
+  const apiKey = useSelector((state: RootState) => state.key.apiKey);
   const dispatch = useDispatch();
 
   const q = query(collection(db, "users", String(user?.uid), "privateChannel"));
@@ -61,7 +62,11 @@ export const Sidebar = () => {
         const channelName = channel.channel.channelName;
         return (
           <div
-            className="flex cursor-pointer items-center gap-2 rounded-md py-2 pl-2 text-sm hover:bg-gray-700 sm:px-5"
+            className={
+              apiKey || channelName === "ドラえもん"
+                ? "flex cursor-pointer items-center gap-2 rounded-md py-2 pl-2 text-sm hover:bg-gray-700 sm:px-5"
+                : "flex cursor-pointer items-center gap-2 rounded-md py-2 pl-2 text-sm text-gray-600 sm:px-5"
+            }
             key={channel.id}
             onClick={() =>
               dispatch(
