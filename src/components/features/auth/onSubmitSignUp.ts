@@ -7,7 +7,7 @@ import { NavigateFunction } from "react-router-dom";
 import { characters } from "../../../utils/constants";
 
 export const onSubmitSignUp = async (
-  event: React.FormEvent<HTMLFormElement>,
+  event: React.FormEvent<HTMLFormElement> | React.KeyboardEvent,
   name: string,
   photo: File | undefined,
   email: string,

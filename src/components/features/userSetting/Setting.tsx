@@ -23,6 +23,13 @@ export const Setting = ({ handleClose }: any) => {
     handleClose();
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onClickSubmit();
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center gap-2">
@@ -31,6 +38,7 @@ export const Setting = ({ handleClose }: any) => {
           placeholder="OpenAI APIKey"
           value={apiKey ? apiKey : newApiKey}
           onChange={(e) => setNewApiKey(e.target.value)}
+          onKeyDown={handleKeyDown}
           className="w-[200px] md:w-[360px]"
           size="small"
         />

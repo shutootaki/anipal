@@ -52,6 +52,12 @@ export const SignUpPage = () => {
     );
   }
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      onSubmitSignUp(event, name, photo, email, password, navigate, setLoading);
+    }
+  };
+
   return (
     <div className="flex h-full items-center justify-center bg-gray-600">
       <div className="flex w-10/12 rounded-lg bg-white px-8 py-4 shadow-lg lg:w-5/12 lg:px-12 lg:py-8">
@@ -143,6 +149,7 @@ export const SignUpPage = () => {
               id="password"
               size="small"
               onChange={handlePasswordChange}
+              onKeyDown={handleKeyDown}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton

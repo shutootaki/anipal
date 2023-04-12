@@ -22,6 +22,12 @@ export const SignInPage = () => {
     setPassword(event.target.value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      onSubmitSignIn(event, email, password, navigate);
+    }
+  };
+
   return (
     <div className="flex h-full items-center justify-center bg-gray-600">
       <div className="flex w-10/12 rounded-lg bg-white p-8 shadow-lg lg:w-5/12 lg:p-12">
@@ -66,6 +72,7 @@ export const SignInPage = () => {
               id="password"
               size="small"
               onChange={handlePasswordChange}
+              onKeyDown={handleKeyDown}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
