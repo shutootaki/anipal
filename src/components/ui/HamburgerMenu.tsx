@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setChannelInfo } from "../../store/channelSlice";
 import { BsList } from "react-icons/bs";
@@ -19,6 +19,11 @@ export const HamburgerMenu = ({ channels }: Props) => {
   const [sidebar, setSidebar] = useState(false);
   const dispatch = useDispatch();
   const apiKey = useSelector((state: RootState) => state.key.apiKey);
+
+  useLayoutEffect(() => {
+    const overlay = document.querySelector("#overlay");
+    overlay?.classList.toggle("overlay", sidebar);
+  }, [sidebar]);
 
   return (
     <>

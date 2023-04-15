@@ -93,6 +93,7 @@ export const ChatBody = () => {
           </div>
         </div>
       ))}
+      <div id="overlay"></div>
     </div>
   );
 };
