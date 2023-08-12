@@ -67,7 +67,7 @@ export const ChatBody = () => {
         <div className="m-4">
           <h1 className="py-9 text-center text-xl font-bold text-white">
             <span className="block md:hidden">左上のトグルボタンから</span>
-            チャンネルを選択してください
+            チャンネルを選択
           </h1>
         </div>
       </div>
